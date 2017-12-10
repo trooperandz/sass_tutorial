@@ -1,0 +1,188 @@
+*Css clip
+
+*Css animations
+
+*Three pillars of css
+  -Responsive design
+    Fluid layouts
+    Media queries
+    Responsive images
+    Correct units
+    Desktop-first vs. mobile first
+  -Writing maintainalbe & scalable code
+    Clean
+    Easy to understand
+    Growth
+    Reusable
+    File organization
+    Class naming conventions
+    Proper html structure
+  -Web performance
+    Less http requests
+    Less code
+    Compress code
+    Use css preprocessor
+    Less images
+    Compress images
+
+  *What happens to css when we load a webpage?
+    Loads html
+    Parses html (decodes it line by line) & load css
+    Parses Css
+        Steps:
+          1) Resolve conflicting css declarations (cascading)
+          2) Process final CSS values
+    Builds CSS Object Model
+    Builds the DOM
+    Render Tree
+    Website rendering (Visual formatting model)
+
+  *Css parsing
+    1) Cascading
+      Combines different stylesheets and resolves conflicts when more than one rule
+        applies to the same element
+
+  *Author Declarations (developer) vs. User (web user) vs. Default browser (user agent)
+    How does it resolve conflicts?
+      Importance weight => specificity => source order
+      -Importance
+        User !important declarations
+        Author !important declarations
+        Author declarations
+        User declarations
+        Default browser declarations
+
+      -Specificity determines cascaded value (0,0,1,0)
+        Inline styles
+        Ids
+        classes, pseduo-classes, attribute
+        elements, pseudo-elements
+
+      -Source order
+        The last declaration in the code will override all other ones if there is a tie
+
+  *Rems, ems etc all end up being px eventually
+
+  *Css misc
+    All css properties have an initial value (if none is provided)
+    1.5rem => relative unit that will be converted to px if root value is 16px
+      1.5 x 16px => 24px
+
+  *How units are converted from relative to absolute px
+    font-size: 150%; => 150% of parent's computed font-size
+    length: 10%; => % of parent's computed width
+    *Font-based:
+      em: uses the parent as the reference
+      rem: uses the root as the reference
+      length: 2em; => x * current element's computed font size
+    *Viewport-based:
+      vh: x * 1% of viewport height
+      vw: x * 1% of viewport width
+
+  *Box types
+    Block-level (display: block;)
+      Will always occupy as much space as possible (relative to its parent).
+      Will create line breaks after and before
+    Inline (display: inline)
+      Will only occupy as much space as it needs (content)
+      Will not create line breaks
+      No heights and widths (these don't apply at all)
+      Padding & margin: only horizontal (left & right)
+    Inline-block (display: inline-block;)
+      Technically inline boxes, but work as block on the inside
+      Use only their content space and cause no line breaks
+
+  *Thinking about the layout
+    Think => Build => Architect
+    Modular building blocks (components) should be reusable and independing,
+    Atomic design (one example of architecture method)
+    BEM (block element modifier)
+    7-1 pattern
+      7 diff folders for Sass partials
+      1 main Sass file to import all other files into a compiled css stylesheet
+      Folders:
+        base/ (basic project definitions)
+        components/ (1 file for each component)
+        layout/ (overall layout of the project)
+        pages/ (page-specific styles)
+        themes/ (if you want to implement different visual themes)
+        abstracts/ (code that doesn't output css, like variables and mixins)
+        vendors/ (all 3rd party css)
+
+  *Sass
+    Variables
+    Nesting
+    Operators (mathematical)
+    Partials & imports
+    Mixins (reusable pieces of code)
+    Functions
+    Extends
+    Control directives (conditionals and loops)
+
+  *Mixin example:
+    @mixin clearfix {
+      &::after {
+        content: "";
+        clear: both;
+        display: table;
+      }
+    }
+
+    @include cleafix;
+
+  *Mixin with var:
+    @mixin style-link-text($color) {
+      text-decoration: none;
+      text-transform: uppercase;
+      color: $color;
+    }
+
+    @include style-link-text($color-text-light);
+
+  *Functions:
+    @function divide($a, $b) {
+      @return $a / $b;
+    }
+
+    then...
+    margin: divide(60, 2) * 1px; // 30px
+
+  *Extend:
+    %btn-placeholder {
+      padding: 10px;
+      display: inline-block;
+      text-align: center;
+      border-radius: 100px;
+      width: $width-button;
+      @include style-link-text($color-text-light);
+    }
+
+    then...
+    @extend %btn-placeholder;
+
+    - Difference between extend and mixin:
+      Extend actually copies the selector into the extend block.  Mixins actually copy
+        the code into whatever selector block they have been called from.
+
+    Should only use extend if the code is inherenlty and thematically related to each other (the author
+     prefers mixins to extends for most circumstances.  But there times when extendors are appropriate.
+
+  *Summary of all methods:
+    Variables, nesting, mixins, extends, functions
+
+  *Sass & command line
+    cp index.js .. (makes copy & moves it to folder up one level)
+    mv script.js .. (cuts and copies folder up one level)
+    rm index.js (removes file, BUT does not go to trash bin!!)
+    rm -r js (remove directory, recursively)
+    open hero.jpg (opens picture in default viewer)
+
+  *NPM & Sass
+    npm install node-sass --save-dev
+    npm install live-server
+
+  *To run the server:
+    live-server (at project root)
+
+  *To begin the Sass watch compiling:
+    npm run

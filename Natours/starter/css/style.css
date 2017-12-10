@@ -1,0 +1,171 @@
+/* A basic reset using the universal selector */
+*,
+*:after,
+*::before {
+  margin: 0;
+  padding: 0;
+  /* Better practice; box-sizing is not inheritable by default.
+   * This allows for better manipulation with plugins etc later on */
+  box-sizing: inherit; }
+
+/* Global font size for using rems later on, makes easy rem calculations */
+/* If we set px here, then users cannot manipulate the default browser size, which is bad */
+/* Note: IE < 9 doesn't read rems */
+html {
+  font-size: 62.5%;
+  /* 10px */ }
+
+/* Always place the font resets in the body */
+body {
+  font-family: "Lato";
+  font-weight: 400;
+  /* font-size: 16px; */
+  line-height: 1.7;
+  color: #777;
+  padding: 3rem;
+  /* Dont add borders & padding etc to element size, will make our life easier */
+  box-sizing: border-box; }
+
+.header {
+  /* Should be 95% of the viewport */
+  height: 95vh;
+  /* For linear, could do to right, to right bottom, lots of options */
+  background-image: linear-gradient(to right bottom, rgba(126, 213, 111, 0.8), rgba(40, 180, 133, 0.8)), url("../img/hero.jpg");
+  /* Whatever the width of the viewport, it will try to fit the box */
+  background-size: cover;
+  /* Ensures that the top of the image doesn't get cropped on resize (also could use bottom or center) */
+  background-position: top;
+  /* Polygon goes clockwise from top */
+  clip-path: polygon(0 0, 100% 0, 100% 75vh, 0 100%);
+  position: relative; }
+
+.header__logo-box {
+  position: absolute;
+  top: 4rem;
+  left: 4rem; }
+
+.header__logo {
+  /* Width will scale automatically if you don't specify */
+  height: 3.5rem; }
+
+.header__text-box {
+  /* First move 50% of parent el, then the transform moves half the element itself */
+  position: absolute;
+  top: 40%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center; }
+
+.heading-primary {
+  color: #fff;
+  text-transform: uppercase;
+  /* Hack to fix a slight move at end of animation */
+  backface-visibility: hidden;
+  margin-bottom: 6rem; }
+
+.heading-primary--main {
+  display: block;
+  font-size: 6rem;
+  font-weight: 400;
+  letter-spacing: 3.5rem;
+  /* These two properties are required for all keyframe animations */
+  animation: moveInLeft 1s ease-out;
+  /* animation-name: moveInLeft;
+  animation-duration: 1s;
+  animation-timing-function: ease-out; */
+  /* animation-iteration-count: 3; */
+  /* animation-delay: 3s; */ }
+
+.heading-primary--sub {
+  display: block;
+  font-size: 2rem;
+  font-weight: 700;
+  letter-spacing: 1.75rem;
+  animation: moveInRight 1s ease-out;
+  /* animation-name: moveInRight;
+  animation-duration: 1s;
+  animation-timing-function: ease-out; */ }
+
+/* For browser performance, limit to two transition properties mostly */
+@keyframes moveInLeft {
+  0% {
+    opacity: 0;
+    transform: translateX(-10rem); }
+  80% {
+    transform: translateX(1rem); }
+  100% {
+    opacity: 1;
+    transform: translate(0); } }
+
+@keyframes moveInRight {
+  0% {
+    opacity: 0;
+    transform: translateX(10rem); }
+  80% {
+    transform: translateX(-1rem); }
+  100% {
+    opacity: 1;
+    transform: translate(0); } }
+
+@keyframes moveInBottom {
+  0% {
+    opacity: 0;
+    transform: translateY(3rem); }
+  100% {
+    opacity: 1;
+    transform: translate(0); } }
+
+/* Special state for anchors */
+.btn:link,
+.btn:visited {
+  text-transform: uppercase;
+  text-decoration: none;
+  padding: 1.5rem 4rem;
+  display: inline-block;
+  border-radius: 10rem;
+  transition: all .2s;
+  position: relative;
+  /* For psedo selector */
+  font-size: 1.6rem; }
+
+.btn:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 1rem 2rem rgba(0, 0, 0, 0.2); }
+
+.btn:active {
+  transform: translateY(-1px);
+  box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.2); }
+
+.btn--white {
+  background-color: #fff;
+  color: #777; }
+
+.btn:after {
+  /* content and display props are always necessary for psedo elements */
+  content: "";
+  display: inline-block;
+  /* needs to match btn block */
+  height: 100%;
+  /* Same dimensions as parent (btn) */
+  width: 100%;
+  border-radius: 10rem;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: -1;
+  /* Don't want it to cover up the button */
+  transition: all .4s; }
+
+.btn--white:after {
+  background-color: #fff; }
+
+.btn:hover::after {
+  /* Basically on hover, grow it & fade at the same time */
+  transform: scaleX(1.4) scaleY(1.6);
+  opacity: 0; }
+
+.btn--animated {
+  /* Animation name, durateion, timing, delay */
+  animation: moveInBottom .5s ease-out .6s;
+  /* Automatically applies styles at 0% before animation starts */
+  animation-fill-mode: backwards; }
