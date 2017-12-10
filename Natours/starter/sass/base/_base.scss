@@ -1,0 +1,22 @@
+/* A basic reset using the universal selector */
+*,
+*:after,
+*::before {
+  margin: 0;
+  padding: 0;
+  /* Better practice; box-sizing is not inheritable by default.
+   * This allows for better manipulation with plugins etc later on */
+  box-sizing: inherit;
+}
+
+/* Global font size for setting rems, makes easy rem calculations */
+/* If we set px here, then users cannot manipulate the default browser size, which is bad */
+/* Note: IE < 9 doesn't read rems */
+html {
+  font-size: 62.5%; /* 10px */
+}
+
+body {
+  /* Dont add borders & padding etc to element size, will make our life easier */
+  box-sizing: border-box;
+}

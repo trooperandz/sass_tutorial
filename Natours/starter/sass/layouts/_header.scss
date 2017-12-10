@@ -1,0 +1,37 @@
+.header {
+  /* Should be 95% of the viewport */
+  height: 95vh;
+  /* For linear, could do to right, to right bottom, lots of options */
+  background-image: linear-gradient(
+    to right bottom,
+    rgba($color-primary-light, 0.8),
+    rgba($color-primary-dark, 0.8)),
+  url("../img/hero.jpg");
+  /* Whatever the width of the viewport, it will try to fit the box */
+  background-size: cover;
+  /* Ensures that the top of the image doesn't get cropped on resize (also could use bottom or center) */
+  background-position: top;
+  /* Polygon goes clockwise from top */
+  clip-path: polygon(0 0, 100% 0, 100% 75vh, 0 100%);
+  position: relative;
+
+  &__logo-box {
+    position: absolute;
+    top: 4rem;
+    left: 4rem;
+  }
+
+  &__logo {
+    /* Width will scale automatically if you don't specify */
+    height: 3.5rem;
+  }
+
+  &__text-box {
+    /* First move 50% of parent el, then the transform moves half the element itself */
+    position: absolute;
+    top: 40%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+  }
+}
