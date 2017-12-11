@@ -1,7 +1,6 @@
 .row {
   // Use max-width so that viewport will fill 100% of available space, but won't stretch absurdly on really large devices
   max-width: $grid-width; // 1140px
-  background-color: #eee;
   // The browser will automatically figure out the left and right margin, and they will be the same with the element centered
   margin: 0 auto;
 
@@ -17,7 +16,6 @@
   // The * says "Contains"
   // The $ says "Ends with..."
   [class^="col-"] {
-    background-color: orangered;
     float: left;
 
     &:not(:last-child) {
