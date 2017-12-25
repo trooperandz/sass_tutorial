@@ -12,6 +12,7 @@
   /* Ensures that the top of the image doesn't get cropped on resize (also could use bottom or center) */
   background-position: top;
   /* Polygon goes clockwise from top */
+  -webkit-clip-path: polygon(0 0, 100% 0, 100% 75vh, 0 100%);
   clip-path: polygon(0 0, 100% 0, 100% 75vh, 0 100%);
   position: relative;
 
